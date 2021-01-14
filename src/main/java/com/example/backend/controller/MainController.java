@@ -1,19 +1,21 @@
-package com.example.backend;
+package com.example.backend.controller;
+
+import com.example.backend.model.Todo;
+import com.example.backend.repository.TodoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
-@RequestMapping(path="/api")
+@RequestMapping(path = "/api")
 @CrossOrigin(origins = "http://localhost:3000")
 public class MainController {
-  @Autowired 
+  @Autowired
   private TodoRepository todoRepository;
 
-  @PostMapping(path="/add")
-  public @ResponseBody String addNewTodo (@RequestParam String todo) {
+  @PostMapping(path = "/add")
+  public @ResponseBody String addNewTodo(@RequestParam String todo) {
 
     Todo n = new Todo();
     n.setTodo(todo);
@@ -21,7 +23,7 @@ public class MainController {
     return "Saved";
   }
 
-  @GetMapping(path="/all")
+  @GetMapping(path = "/all")
   public @ResponseBody Iterable<Todo> getAllTodos() {
     return todoRepository.findAll();
   }
